@@ -5,6 +5,7 @@ import CommuteIcon from '@mui/icons-material/Commute';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import { LoadingButton } from '@mui/lab';
 import {styled} from "@mui/material/styles";
+import AppBarExample from './components/AppBar';
 
 const StyledButton = styled(Button)({
   fontSize: 25,
@@ -15,6 +16,7 @@ const StyledButton = styled(Button)({
 function App() {
   return (
     <div className="App">
+      <AppBarExample />
       <StyledButton variant='outlined' size="small" startIcon={<CommuteIcon />} endIcon={<CommuteIcon />}>
         Button1
       </StyledButton>
