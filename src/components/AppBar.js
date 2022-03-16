@@ -1,22 +1,38 @@
-import { AppBar, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button,  Divider,  Drawer, IconButton,  List,  ListItem,  ListItemIcon,  ListItemText,  Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import LenneyFace from "./assets/LennyFace.jpeg";
 import MenuIcon from '@mui/icons-material/Menu';
+import AirlineSeatFlatIcon from '@mui/icons-material/AirlineSeatFlat';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import { styled, useTheme } from '@mui/material/styles';
+import { Air, ListAlt } from "@mui/icons-material";
 
 const pages = ["Cards", "Carousel", "Table"];
 
+const DrawerHeader = styled('div')((({theme}) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end'
+})))
+
+const drawerWidth = 241;
+
 function AppBarExample() {
+    const theme = useTheme()
+    const [open, setOpen] = useState(false);
 
-    const [anchorElNav, setAnchorElNav]= useState(null);
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
+    const handleDrawerOpen = () => {
+      setOpen(true)
+    }
+    
+    const handleDrawerClose = () => {
+      setOpen(false)
     }
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null)
-    }
+
 
   return (
     <div className="App">
@@ -36,42 +52,16 @@ function AppBarExample() {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={handleDrawerOpen}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-                
                 </Box>
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -81,6 +71,43 @@ function AppBarExample() {
             </Toolbar>
         </AppBar>
      </Box>
+
+        <Drawer
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box'
+            },
+          }}
+          variant="temporary"
+          anchor="left"
+          onClose={() => {
+            handleDrawerClose()
+          }}
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? <AgricultureIcon /> : <AirlineSeatFlatIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {pages.map((link, index) => {
+              return(
+                <ListItem button key={index}>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <AgricultureIcon /> : <AirlineSeatFlatIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={link}/>
+                </ListItem>
+              )
+            })}
+          </List>
+        </Drawer>
+
     </div>
   );
 }
