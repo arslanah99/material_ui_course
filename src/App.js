@@ -6,6 +6,11 @@ import CopyrightIcon from '@mui/icons-material/Copyright';
 import { LoadingButton } from '@mui/lab';
 import {styled} from "@mui/material/styles";
 import AppBarExample from './components/AppBar';
+import { Route, Routes } from 'react-router-dom';
+import HomeExample from './components/Home';
+import CardExample from './components/Card';
+import CarouselExample from './components/Carousel';
+import TableExample from './components/Table';
 
 const StyledButton = styled(Button)({
   fontSize: 25,
@@ -17,15 +22,13 @@ function App() {
   return (
     <div className="App">
       <AppBarExample />
-      <StyledButton variant='outlined' size="small" startIcon={<CommuteIcon />} endIcon={<CommuteIcon />}>
-        Button1
-      </StyledButton>
-      <IconButton color="warning" size="large">
-        <CopyrightIcon />
-      </IconButton>
-      <LoadingButton variant='contained'  loadingPosition='start'  startIcon={<CommuteIcon />}>
-        LOADING BUTTON
-      </LoadingButton>
+      <Routes>
+        <Route path="/" element={<HomeExample />}/>
+        <Route path="/Cards" element={<CardExample />}/>
+        <Route path="/Carousel" element={<CarouselExample />}/>
+        <Route path="/Table" element={<TableExample />}/>
+
+      </Routes>
     </div>
   );
 }

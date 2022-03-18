@@ -7,6 +7,7 @@ import AirlineSeatFlatIcon from '@mui/icons-material/AirlineSeatFlat';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { styled, useTheme } from '@mui/material/styles';
 import { Air, ListAlt } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const pages = ["Cards", "Carousel", "Table"];
 
@@ -62,6 +63,8 @@ function AppBarExample() {
             {pages.map((page) => (
               <Button
                 key={page}
+                component={Link}
+                to={`/${page}`}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -97,7 +100,10 @@ function AppBarExample() {
           <List>
             {pages.map((link, index) => {
               return(
-                <ListItem button key={index}>
+                <ListItem button
+                component={Link}
+                to={`/${link}`}
+                key={index}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <AgricultureIcon /> : <AirlineSeatFlatIcon />}
                   </ListItemIcon>
