@@ -9,7 +9,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import { Air, ListAlt } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const pages = ["Cards", "Carousel", "Table"];
+const pages = ["Cards", "Carousel", "Table", "Chips"];
 
 const DrawerHeader = styled('div')((({theme}) => ({
   display: "flex",
